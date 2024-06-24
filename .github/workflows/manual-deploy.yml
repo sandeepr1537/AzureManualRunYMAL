@@ -1,0 +1,24 @@
+name: Manual Deployment Workflow
+
+on:
+  workflow_dispatch:  # This event allows manual triggering
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Azure Login
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Deploy Azure Resource Group
+        run: |
+          az deployment group create \
+            --resource-group <existing-resource-group> \
+            --template-file azuredeploy.json \
+            --parameters location=westus2
+          # Replace <existing-resource-group> and parameters as needed
