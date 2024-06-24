@@ -18,7 +18,7 @@ jobs:
       - name: Deploy Azure Resource Group
         run: |
           az deployment group create \
-            --resource-group <existing-resource-group> \
+            --resource-group rg01-github \
             --template-file azuredeploy.json \
-            --parameters location=westus2
+            --parameters location=australiaeast
           # Replace <existing-resource-group> and parameters as needed
